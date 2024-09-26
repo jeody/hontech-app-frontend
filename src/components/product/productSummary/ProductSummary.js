@@ -1,0 +1,89 @@
+import React, { useEffect } from 'react';
+import './ProductSummary.scss';
+//import { AiFillDollarCircle } from 'react-icons/ai';
+import { TbCurrencyPeso } from 'react-icons/tb';
+import { BsCart4, BsCartX } from 'react-icons/bs';
+import { BiCategory } from 'react-icons/bi';
+import InfoBox from '../../infoBox/InfoBox';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  CALC_PROFIT_VALUE,
+  //CALC_CATEGORY,
+  CALC_SUBCATEGORY,
+  CALC_OUTOFSTOCK,
+  CALC_STORE_VALUE,
+  selectTotalProfitValue,
+  selectOutOfStock,
+  selectTotalStoreValue,
+  //selectCategory,
+  selectSubCategory,
+} from '../../../redux/features/product/productSlice';
+
+// Icons
+//const earningIcon = <AiFillDollarCircle size={40} color='#fff' />;
+const earningIcon = <TbCurrencyPeso size={40} color='#fff' />;
+const productIcon = <BsCart4 size={40} color='#fff' />;
+const categoryIcon = <BiCategory size={40} color='#fff' />;
+const outOfStockIcon = <BsCartX size={40} color='#fff' />;
+
+// Format Amount
+export const formatNumbers = (x) => {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};
+
+const ProductSummary = ({ products }) => {
+  const dispatch = useDispatch();
+  const totalStoreValue = useSelector(selectTotalStoreValue);
+  const totalProfitValue = useSelector(selectTotalProfitValue);
+  const outOfStock = useSelector(selectOutOfStock);
+  //const category = useSelector(selectCategory);
+  const subcategory = useSelector(selectSubCategory);
+
+  useEffect(() => {
+    dispatch(CALC_STORE_VALUE(products));
+    dispatch(CALC_PROFIT_VALUE(products));
+    dispatch(CALC_OUTOFSTOCK(products));
+    //dispatch(CALC_CATEGORY(products));
+    dispatch(CALC_SUBCATEGORY(products));
+  }, [dispatch, products]);
+
+  return (
+    <div className='product-summary'>
+      <h3 className='--mt'>Inventory Stats</h3>
+      <div className='info-summary'>
+        <InfoBox
+          icon={productIcon}
+          title={'Total Products'}
+          count={products.length}
+          bgColor='card1'
+        />
+        <InfoBox
+          icon={earningIcon}
+          title={'Total Store Value'}
+          count={`\u20B1 ${formatNumbers(totalStoreValue.toFixed(2))}`}
+          bgColor='card2'
+        />
+        <InfoBox
+          icon={outOfStockIcon}
+          title={'Out of Stock'}
+          count={outOfStock}
+          bgColor='card3'
+        />
+        <InfoBox
+          icon={categoryIcon}
+          title={'All Categories'}
+          count={subcategory.length}
+          bgColor='card4'
+        />
+        <InfoBox
+          icon={earningIcon}
+          title={'Total Profit Value'}
+          count={`\u20B1 ${formatNumbers(totalProfitValue.toFixed(2))}`}
+          bgColor='card5'
+        />
+      </div>
+    </div>
+  );
+};
+
+export default ProductSummary;
