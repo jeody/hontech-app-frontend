@@ -1,9 +1,9 @@
 import React from 'react';
-import { GiCarSeat } from 'react-icons/gi';
+//import { GiCarSeat } from 'react-icons/gi';
 import { Link } from 'react-router-dom';
 import './Home.scss';
 import heroImg from '../../assets/inv-img.png';
-//import hontechLogo from '../../assets/hontech-logo.png';
+import hontechLogo from '../../assets/hontech-logo.png';
 import { ShowOnLogin, ShowOnLogout } from '../../protect/HiddenLink';
 
 const Home = () => {
@@ -11,8 +11,8 @@ const Home = () => {
     <div className='home'>
       <nav className='container --flex-between'>
         <div className='logo'>
-          <GiCarSeat size={35} />
-          {/*<img src={hontechLogo} alt='Hontech' />*/}
+          {/*<GiCarSeat size={35} />*/}
+          <img src={hontechLogo} alt='Hontech' />
         </div>
 
         <ul className='home-links'>

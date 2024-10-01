@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import './Sidebar.scss';
 import { HiMenuAlt3 } from 'react-icons/hi';
-import { GiCarSeat } from 'react-icons/gi';
+//import { GiCarSeat } from 'react-icons/gi';
 import menu from '../../data/sidebar';
 import SidebarItems from './SidebarItems';
 import { useNavigate } from 'react-router-dom';
-//import hontechLogo from '../../assets/hontech-logo-sm.png';
+import hontechLogo from '../../assets/hontech-logo-sm.png';
 
 const Sidebar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(true);
@@ -21,19 +21,19 @@ const Sidebar = ({ children }) => {
       <div className='sidebar' style={{ width: isOpen ? '230px' : '60px' }}>
         <div className='top_section'>
           <div className='logo' style={{ display: isOpen ? 'block' : 'none' }}>
+            {/*
             <GiCarSeat
               size={35}
               style={{ cursor: 'pointer' }}
               onClick={goHome}
             />
-            {/* 
+          */}
             <img
               src={hontechLogo}
               alt='Hontech'
               style={{ cursor: 'pointer' }}
               onClick={goHome}
             />
-            */}
           </div>
 
           <div
