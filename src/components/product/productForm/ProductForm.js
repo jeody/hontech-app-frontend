@@ -47,15 +47,15 @@ const ProductForm = ({
             onChange={handleInputChange}
           />
 
-          <label>Group:</label>
-          <input
-            type='text'
-            placeholder='Materials/Parts'
+          <label>Product Type:</label>
+          <select
             name='category'
             value={product?.category}
             onChange={handleInputChange}
-          />
-
+          >
+            <option value='materials'>Materials</option>
+            <option value='parts'>Parts</option>
+          </select>
           <label>Category:</label>
           <input
             type='text'
